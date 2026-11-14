@@ -5,7 +5,7 @@ lua54 'yes'
 name 'hype-wallet'
 author 'HypeScripts'
 version '1.0.0'
-description 'Card wallet built with Veyra UI'
+description 'Hype Wallet is a card wallet for Qbox servers. Players keep their ID card and licenses in a wallet item, view them full size and show them to nearby players. Cards keep their item metadata, so the name, photo and citizen ID are always the real ones.'
 
 dependencies {
     'ox_lib',
