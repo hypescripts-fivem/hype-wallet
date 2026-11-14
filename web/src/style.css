@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Same tokens as @vezironi/veyra-ui (dark theme) so app-level utilities (bg-bg-surface, text-text-faint, ...) resolve */
+@theme static {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg-base: #0a0a0a;
+  --color-bg-surface: #0f0f0f;
+  --color-bg-muted: #1a1a1a;
+  --color-bg-muted-hover: #252525;
+  --color-bg-muted-active: #2a2a2a;
+  --color-bg-elevated: #262626;
+  --color-bg-inset: #0a0a0a;
+  --color-border: #1f1f1f;
+  --color-text-primary: #ffffff;
+  --color-text-muted: #a3a3a3;
+  --color-text-faint: #525252;
+  --color-ring: #ffffff80;
+  --color-inverse: #ffffff;
+  --color-text-inverse: #0a0a0a;
+  --color-success: #34d399;
+  --color-danger: #f87171;
+  --color-warning: #fbbf24;
+  --color-info: #38bdf8;
+}
+
+/*
+ * Components stay dark, but the page must not: Veyra sets `color-scheme: dark` on :root, and in FiveM's
+ * browser that paints an opaque dark canvas over the game even while the UI is closed.
+ * `html:root` outranks Veyra's `:root`.
+ */
+html:root {
+  color-scheme: light;
+  /* Scrollbars would follow the light scheme; keep them matching the dark components */
+  scrollbar-color: var(--color-bg-elevated) transparent;
+}
+
+/* NUI renders on top of the game, so the page itself stays transparent */
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  background: transparent !important;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
