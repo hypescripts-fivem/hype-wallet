@@ -2,6 +2,7 @@
 import { motion } from "motion-v";
 import { Badge, Spinner } from "@vezironi/veyra-ui";
 import CardFace from "@/components/CardFace.vue";
+import { t } from "@/lib/i18n";
 import type { WalletCard } from "@/types";
 
 defineProps<{
@@ -16,7 +17,7 @@ const emit = defineEmits<{
 }>();
 
 function holderName(card: WalletCard) {
-  return [card.holder.firstname, card.holder.lastname].filter(Boolean).join(" ") || "İsimsiz";
+  return [card.holder.firstname, card.holder.lastname].filter(Boolean).join(" ") || t("picker.unnamed");
 }
 </script>
 
@@ -30,12 +31,12 @@ function holderName(card: WalletCard) {
     :transition="{ type: 'spring', stiffness: 380, damping: 36 }"
   >
     <div class="flex items-center gap-2 border-b border-border px-4 py-3">
-      <p class="text-sm font-semibold text-text-primary">Kart ekle</p>
-      <Badge variant="muted">Yuva {{ String(slotNumber).padStart(2, "0") }}</Badge>
+      <p class="text-sm font-semibold text-text-primary">{{ t("picker.title") }}</p>
+      <Badge variant="muted">{{ t("picker.slot", String(slotNumber).padStart(2, "0")) }}</Badge>
       <Spinner v-if="pending" size="sm" class="ml-auto" />
       <button
         type="button"
-        aria-label="Vazgeç"
+        :aria-label="t('picker.cancel')"
         class="flex size-7 cursor-pointer items-center justify-center rounded-md text-text-faint transition-colors hover:bg-bg-muted hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         :class="{ 'ml-auto': !pending }"
         @click="emit('cancel')"
@@ -47,7 +48,7 @@ function holderName(card: WalletCard) {
     </div>
 
     <div v-if="inventory.length" class="flex-1 overflow-y-auto p-2">
-      <p class="px-2 pt-1 pb-2 text-[11px] text-text-muted">Envanterindeki kartlar · seçtiğin kart envanterden alınır</p>
+      <p class="px-2 pt-1 pb-2 text-[11px] text-text-muted">{{ t("picker.hint") }}</p>
 
       <button
         v-for="card in inventory"
@@ -64,13 +65,13 @@ function holderName(card: WalletCard) {
           <p class="truncate text-sm font-semibold text-text-primary">{{ card.label }}</p>
           <p class="truncate text-xs text-text-muted">{{ holderName(card) }}</p>
         </div>
-        <span class="text-xs font-semibold text-text-faint transition-colors group-hover:text-text-primary">Ekle</span>
+        <span class="text-xs font-semibold text-text-faint transition-colors group-hover:text-text-primary">{{ t("picker.add") }}</span>
       </button>
     </div>
 
     <div v-else class="grid flex-1 place-content-center gap-1 p-6 text-center">
-      <p class="text-sm font-semibold text-text-primary">Eklenecek kart yok</p>
-      <p class="text-xs text-text-muted">Envanterinde cüzdana konabilecek bir kart bulunmuyor.</p>
+      <p class="text-sm font-semibold text-text-primary">{{ t("picker.empty_title") }}</p>
+      <p class="text-xs text-text-muted">{{ t("picker.empty_text") }}</p>
     </div>
   </motion.div>
 </template>

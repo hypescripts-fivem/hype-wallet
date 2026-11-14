@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { AnimatePresence, motion } from "motion-v";
 import { Kbd } from "@vezironi/veyra-ui";
 import CardFace from "@/components/CardFace.vue";
+import { t } from "@/lib/i18n";
 import type { ShownCardPayload } from "@/types";
 
 // `key` changes for every new show so a replacing card animates in again
@@ -35,9 +36,9 @@ const keyLabel = computed(() => {
       >
         <div class="flex items-center gap-2 rounded-lg border border-border bg-bg-surface/90 px-3 py-2 shadow-xl">
           <span class="size-1.5 rounded-full bg-success" />
-          <p class="text-xs font-semibold text-text-primary">Sana bir kart gösteriliyor</p>
+          <p class="text-xs font-semibold text-text-primary">{{ t("shown.title") }}</p>
           <span v-if="keyLabel" class="ml-auto flex items-center gap-1.5 text-[11px] text-text-muted">
-            <Kbd>{{ keyLabel }}</Kbd> Kapat
+            <Kbd>{{ keyLabel }}</Kbd> {{ t("shown.close") }}
           </span>
         </div>
 

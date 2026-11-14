@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion-v";
 import { Badge, Kbd } from "@vezironi/veyra-ui";
 import CardFace from "@/components/CardFace.vue";
 import CardPicker from "@/components/CardPicker.vue";
+import { t } from "@/lib/i18n";
 import type { WalletCard } from "@/types";
 
 const props = defineProps<{
@@ -81,7 +82,7 @@ function select(card: WalletCard) {
     <header
       class="flex touch-none items-center gap-x-2.5 px-5 pt-4 pb-1 select-none"
       :class="dragging ? 'cursor-grabbing' : 'cursor-grab'"
-      title="Sürükleyerek taşı · çift tıkla: varsayılan konum"
+      :title="t('wallet.drag_hint')"
       @pointerdown="onHandlePointerDown"
       @dblclick="emit('resetPosition')"
     >
@@ -89,7 +90,7 @@ function select(card: WalletCard) {
         <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
         <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
       </svg>
-      <p class="text-sm font-semibold text-text-primary">Cüzdan</p>
+      <p class="text-sm font-semibold text-text-primary">{{ t("wallet.title") }}</p>
       <Badge variant="muted">{{ cards.length }}/{{ slots }}</Badge>
 
       <svg class="ml-auto size-4 text-text-faint" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -100,7 +101,7 @@ function select(card: WalletCard) {
 
       <button
         type="button"
-        aria-label="Kapat"
+        :aria-label="t('wallet.close')"
         class="flex size-7 cursor-pointer items-center justify-center rounded-md text-text-faint transition-colors hover:bg-bg-muted hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         @click="emit('close')"
       >
@@ -139,16 +140,16 @@ function select(card: WalletCard) {
           v-else
           type="button"
           class="empty-slot group"
-          :aria-label="`Yuva ${index + 1}: kart ekle`"
+          :aria-label="t('wallet.slot_label', index + 1)"
           :style="{ height: `${CARD_HEIGHT}px` }"
           :animate="{ y: offsetFor(index) }"
           :transition="spring"
           @mouseenter="hovered = null"
           @click="emit('openPicker', index + 1)"
         >
-          <span>Boş yuva</span>
+          <span>{{ t("wallet.empty_slot") }}</span>
           <span class="tabular-nums group-hover:hidden">{{ String(index + 1).padStart(2, "0") }}</span>
-          <span class="hidden text-text-primary group-hover:inline">+ Kart ekle</span>
+          <span class="hidden text-text-primary group-hover:inline">{{ t("wallet.add_card") }}</span>
         </motion.button>
       </div>
 
@@ -164,12 +165,12 @@ function select(card: WalletCard) {
       >
         <div class="grid flex-1 place-content-center gap-1">
           <p class="front-pocket__emboss">HYPE</p>
-          <p v-if="!cards.length" class="text-center text-xs text-text-muted">Cüzdanında kart yok</p>
+          <p v-if="!cards.length" class="text-center text-xs text-text-muted">{{ t("wallet.no_cards") }}</p>
         </div>
 
         <div class="flex items-center justify-between text-[11px] text-text-muted">
-          <span>{{ cards.length ? "Görüntülemek için karta tıkla" : "Eklemek için boş yuvaya tıkla" }}</span>
-          <span class="flex items-center gap-1.5"><Kbd>ESC</Kbd> Kapat</span>
+          <span>{{ cards.length ? t("wallet.hint_view") : t("wallet.hint_add") }}</span>
+          <span class="flex items-center gap-1.5"><Kbd>ESC</Kbd> {{ t("wallet.close") }}</span>
         </div>
       </motion.div>
 

@@ -1,0 +1,72 @@
+{
+    "notify": {
+        "title": "Wallet",
+        "card_shown": "You showed your card to the person next to you.",
+        "no_one_nearby": "There is no one nearby to show your card to.",
+        "no_wallet": "You don't have a wallet on you.",
+        "wallet_gone": "The wallet is no longer on you.",
+        "slot_taken": "This slot is taken.",
+        "card_not_found": "The card could not be found in your inventory.",
+        "card_take_failed": "The card could not be taken from your inventory.",
+        "inventory_full": "There is no room for the card in your inventory.",
+        "card_give_failed": "The card could not be added to your inventory.",
+        "card_not_in_wallet": "This card is no longer in your wallet."
+    },
+    "command": {
+        "open": "Open your wallet"
+    },
+    "keybind": {
+        "hide_card": "Close the card shown to you"
+    },
+    "card": {
+        "id": "ID Card",
+        "driver_car": "Driver License",
+        "driver_motor": "Motorcycle License",
+        "driver_boat": "Boat License",
+        "driver_plane": "Pilot License",
+        "weapon": "Weapon License",
+        "taxi": "Taxi License"
+    },
+    "ui": {
+        "wallet": {
+            "title": "Wallet",
+            "drag_hint": "Drag to move · double click: default position",
+            "close": "Close",
+            "slot_label": "Slot %s: add card",
+            "empty_slot": "Empty slot",
+            "add_card": "+ Add card",
+            "no_cards": "Your wallet is empty",
+            "hint_view": "Click a card to view it",
+            "hint_add": "Click an empty slot to add a card"
+        },
+        "picker": {
+            "title": "Add card",
+            "slot": "Slot %s",
+            "cancel": "Cancel",
+            "hint": "Cards in your inventory · the card you pick is taken from it",
+            "add": "Add",
+            "empty_title": "No cards to add",
+            "empty_text": "There is no card in your inventory that fits in the wallet.",
+            "unnamed": "Unnamed"
+        },
+        "card": {
+            "name": "Full Name",
+            "birthdate": "Date of Birth",
+            "sex": "Sex",
+            "nationality": "Nationality",
+            "citizenid": "Citizen ID",
+            "male": "Male",
+            "female": "Female"
+        },
+        "viewer": {
+            "back": "Back",
+            "return": "Back to wallet",
+            "remove": "Remove from wallet",
+            "show": "Show to nearby"
+        },
+        "shown": {
+            "title": "A card is being shown to you",
+            "close": "Close"
+        }
+    }
+}

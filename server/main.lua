@@ -38,11 +38,12 @@ local function mugShot(value)
     end
 end
 
+--- Sent as a locale key so every player reads it in their own language
 ---@param src number
----@param description string
+---@param key string locale key
 ---@param kind 'success' | 'error' | 'inform'
-local function notify(src, description, kind)
-    TriggerClientEvent('ox_lib:notify', src, { title = 'Cüzdan', description = description, type = kind })
+local function notify(src, key, kind)
+    TriggerClientEvent('hype-wallet:client:notify', src, key, kind)
 end
 
 ---@param card table config entry
@@ -205,7 +206,7 @@ local function openWallet(src, item)
     end
 
     if not item then
-        notify(src, 'Üzerinde cüzdan yok.', 'error')
+        notify(src, 'notify.no_wallet', 'error')
         return
     end
 
@@ -228,7 +229,7 @@ local function walletAction(src, fn)
 
     local walletId = getOpenWallet(src)
     if not walletId then
-        notify(src, 'Cüzdan artık üzerinde değil.', 'error')
+        notify(src, 'notify.wallet_gone', 'error')
         return { ok = false, close = true }
     end
 
@@ -248,19 +249,19 @@ lib.callback.register('hype-wallet:server:addCard', function(src, inventorySlot,
     return walletAction(src, function(walletId)
         local slot = walletSlot(targetSlot)
         if not slot or getStoredCard(walletId, slot) then
-            notify(src, 'Bu yuva dolu.', 'error')
+            notify(src, 'notify.slot_taken', 'error')
             return false
         end
 
         local item = tonumber(inventorySlot) and ox_inventory:GetSlot(src, tonumber(inventorySlot))
         if not item or not cardByItem[item.name] then
-            notify(src, 'Kart envanterinde bulunamadı.', 'error')
+            notify(src, 'notify.card_not_found', 'error')
             return false
         end
 
         -- Remove first, store after: a failed removal never creates a copy
         if not ox_inventory:RemoveItem(src, item.name, 1, nil, item.slot) then
-            notify(src, 'Kart envanterden alınamadı.', 'error')
+            notify(src, 'notify.card_take_failed', 'error')
             return false
         end
 
@@ -276,7 +277,7 @@ lib.callback.register('hype-wallet:server:removeCard', function(src, targetSlot)
         if not entry then return false end
 
         if not ox_inventory:CanCarryItem(src, entry.name, 1, entry.metadata) then
-            notify(src, 'Envanterinde kart için yer yok.', 'error')
+            notify(src, 'notify.inventory_full', 'error')
             return false
         end
 
@@ -285,7 +286,7 @@ lib.callback.register('hype-wallet:server:removeCard', function(src, targetSlot)
 
         if not ox_inventory:AddItem(src, entry.name, 1, entry.metadata) then
             setStoredCard(walletId, slot, entry)
-            notify(src, 'Kart envantere eklenemedi.', 'error')
+            notify(src, 'notify.card_give_failed', 'error')
             return false
         end
 
@@ -326,13 +327,13 @@ RegisterNetEvent('hype-wallet:server:showCard', function(cardId, target)
     local card = entry and entry.name == itemName and cardByItem[entry.name]
 
     if not card then
-        notify(src, 'Bu kart artık cüzdanında değil.', 'error')
+        notify(src, 'notify.card_not_in_wallet', 'error')
         return
     end
 
     target = tonumber(target)
     if not isNearbyPlayer(src, target) then
-        notify(src, 'Yakınında kartı gösterebileceğin kimse yok.', 'error')
+        notify(src, 'notify.no_one_nearby', 'error')
         return
     end
 
@@ -355,7 +356,7 @@ exports.qbx_core:CreateUseableItem(config.walletItem, function(source, item)
 end)
 
 if config.command then
-    lib.addCommand(config.command, { help = 'Cüzdanını aç' }, function(source)
+    lib.addCommand(config.command, { help = locale('command.open') }, function(source)
         openWallet(source)
     end)
 end

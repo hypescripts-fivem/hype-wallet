@@ -5,6 +5,7 @@ import CardViewer from "@/components/CardViewer.vue";
 import ShownCard from "@/components/ShownCard.vue";
 import Wallet from "@/components/Wallet.vue";
 import { useDraggable } from "@/composables/useDraggable";
+import { setLocale } from "@/lib/i18n";
 import { fetchNui, isEnvBrowser } from "@/lib/nui";
 import { mockAddCard, mockRemoveCard, mockWallet } from "@/mock";
 import type { ShownCardPayload, WalletActionResult, WalletCard, WalletPayload } from "@/types";
@@ -13,7 +14,8 @@ type NuiMessage =
   | { action: "open"; data: WalletPayload }
   | { action: "close" }
   | { action: "showCard"; data: ShownCardPayload }
-  | { action: "hideShownCard" };
+  | { action: "hideShownCard" }
+  | { action: "setLocale"; data: Record<string, string> };
 
 const visible = ref(false);
 const slots = ref(0);
@@ -134,6 +136,7 @@ function onMessage(event: MessageEvent<NuiMessage>) {
   else if (message?.action === "close") hide();
   else if (message?.action === "showCard") displayShownCard(message.data);
   else if (message?.action === "hideShownCard") hideShownCard();
+  else if (message?.action === "setLocale") setLocale(message.data);
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -147,6 +150,8 @@ onMounted(() => {
   window.addEventListener("message", onMessage);
   window.addEventListener("keydown", onKeydown);
   if (isEnvBrowser) open(mockWallet());
+  // Texts come from the game's locale files; until then (and in the browser) the English fallbacks are used
+  else fetchNui<Record<string, string>>("ready").then(setLocale);
 });
 
 onBeforeUnmount(() => {

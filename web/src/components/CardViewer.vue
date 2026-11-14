@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "motion-v";
 import { Button, Kbd } from "@vezironi/veyra-ui";
 import CardFace from "@/components/CardFace.vue";
+import { t } from "@/lib/i18n";
 import type { WalletCard } from "@/types";
 
 defineProps<{ card: WalletCard | null; showPending?: boolean; pending?: boolean }>();
@@ -47,16 +48,16 @@ const spring = { type: "spring", stiffness: 300, damping: 30 } as const;
         :exit="{ opacity: 0, y: 12, transition: { duration: 0.12 } }"
       >
         <p class="text-sm font-semibold text-text-primary">{{ card.label }}</p>
-        <span class="flex items-center gap-1.5 text-xs text-text-faint"><Kbd>ESC</Kbd> Geri</span>
-        <Button size="sm" variant="secondary" @click="emit('close')">Cüzdana dön</Button>
-        <Button size="sm" variant="outline" :disabled="pending" @click="emit('remove', card)">Cüzdandan çıkar</Button>
+        <span class="flex items-center gap-1.5 text-xs text-text-faint"><Kbd>ESC</Kbd> {{ t("viewer.back") }}</span>
+        <Button size="sm" variant="secondary" @click="emit('close')">{{ t("viewer.return") }}</Button>
+        <Button size="sm" variant="outline" :disabled="pending" @click="emit('remove', card)">{{ t("viewer.remove") }}</Button>
         <Button size="sm" variant="primary" :disabled="showPending" @click="emit('show', card)">
           <span class="flex items-center gap-1.5">
             <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0" />
               <circle cx="12" cy="12" r="3" />
             </svg>
-            Yakındakine göster
+            {{ t("viewer.show") }}
           </span>
         </Button>
       </motion.div>

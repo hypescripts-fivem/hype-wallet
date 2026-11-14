@@ -1,0 +1,72 @@
+{
+    "notify": {
+        "title": "Cüzdan",
+        "card_shown": "Kartını yakınındaki kişiye gösterdin.",
+        "no_one_nearby": "Yakınında kartı gösterebileceğin kimse yok.",
+        "no_wallet": "Üzerinde cüzdan yok.",
+        "wallet_gone": "Cüzdan artık üzerinde değil.",
+        "slot_taken": "Bu yuva dolu.",
+        "card_not_found": "Kart envanterinde bulunamadı.",
+        "card_take_failed": "Kart envanterden alınamadı.",
+        "inventory_full": "Envanterinde kart için yer yok.",
+        "card_give_failed": "Kart envantere eklenemedi.",
+        "card_not_in_wallet": "Bu kart artık cüzdanında değil."
+    },
+    "command": {
+        "open": "Cüzdanını aç"
+    },
+    "keybind": {
+        "hide_card": "Gösterilen kartı kapat"
+    },
+    "card": {
+        "id": "Kimlik Kartı",
+        "driver_car": "Araç Sürücü Ruhsatı",
+        "driver_motor": "Motor Sürücü Ruhsatı",
+        "driver_boat": "Tekne Sürücü Ruhsatı",
+        "driver_plane": "Uçak Sürücü Ruhsatı",
+        "weapon": "Silah Ruhsatı",
+        "taxi": "Taksi Lisans Kartı"
+    },
+    "ui": {
+        "wallet": {
+            "title": "Cüzdan",
+            "drag_hint": "Sürükleyerek taşı · çift tıkla: varsayılan konum",
+            "close": "Kapat",
+            "slot_label": "Yuva %s: kart ekle",
+            "empty_slot": "Boş yuva",
+            "add_card": "+ Kart ekle",
+            "no_cards": "Cüzdanında kart yok",
+            "hint_view": "Görüntülemek için karta tıkla",
+            "hint_add": "Eklemek için boş yuvaya tıkla"
+        },
+        "picker": {
+            "title": "Kart ekle",
+            "slot": "Yuva %s",
+            "cancel": "Vazgeç",
+            "hint": "Envanterindeki kartlar · seçtiğin kart envanterden alınır",
+            "add": "Ekle",
+            "empty_title": "Eklenecek kart yok",
+            "empty_text": "Envanterinde cüzdana konabilecek bir kart bulunmuyor.",
+            "unnamed": "İsimsiz"
+        },
+        "card": {
+            "name": "Ad Soyad",
+            "birthdate": "Doğum Tarihi",
+            "sex": "Cinsiyet",
+            "nationality": "Uyruk",
+            "citizenid": "Vatandaş No",
+            "male": "Erkek",
+            "female": "Kadın"
+        },
+        "viewer": {
+            "back": "Geri",
+            "return": "Cüzdana dön",
+            "remove": "Cüzdandan çıkar",
+            "show": "Yakındakine göster"
+        },
+        "shown": {
+            "title": "Sana bir kart gösteriliyor",
+            "close": "Kapat"
+        }
+    }
+}

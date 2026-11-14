@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { t } from "@/lib/i18n";
 import type { WalletCard } from "@/types";
 
 const props = defineProps<{ card: WalletCard }>();
 
-const SEX_LABELS: Record<string, string> = { M: "Erkek", F: "Kadın", Male: "Erkek", Female: "Kadın" };
+// Common metadata values for sex, shown in the player's language; anything else is shown as stored
+const SEX_KEYS: Record<string, string> = { M: "card.male", F: "card.female", Male: "card.male", Female: "card.female" };
 
 const fullName = computed(() => {
   const { firstname, lastname } = props.card.holder;
@@ -14,9 +16,9 @@ const fullName = computed(() => {
 const fields = computed(() => {
   const { birthdate, sex, nationality } = props.card.holder;
   return [
-    { label: "Doğum Tarihi", value: birthdate || "—" },
-    { label: "Cinsiyet", value: (sex && SEX_LABELS[sex]) || sex || "—" },
-    { label: "Uyruk", value: nationality || "—" },
+    { key: "birthdate", label: t("card.birthdate"), value: birthdate || "—" },
+    { key: "sex", label: t("card.sex"), value: (sex && SEX_KEYS[sex] && t(SEX_KEYS[sex])) || sex || "—" },
+    { key: "nationality", label: t("card.nationality"), value: nationality || "—" },
   ];
 });
 </script>
@@ -43,10 +45,10 @@ const fields = computed(() => {
 
         <dl class="card-face__fields">
           <div class="card-face__field card-face__field--wide">
-            <dt>Ad Soyad</dt>
+            <dt>{{ t("card.name") }}</dt>
             <dd>{{ fullName }}</dd>
           </div>
-          <div v-for="field in fields" :key="field.label" class="card-face__field">
+          <div v-for="field in fields" :key="field.key" class="card-face__field">
             <dt>{{ field.label }}</dt>
             <dd>{{ field.value }}</dd>
           </div>
@@ -54,7 +56,7 @@ const fields = computed(() => {
       </div>
 
       <footer class="card-face__footer">
-        <span>Vatandaş No</span>
+        <span>{{ t("card.citizenid") }}</span>
         <span class="card-face__mono">{{ card.holder.citizenid || "—" }}</span>
       </footer>
     </div>

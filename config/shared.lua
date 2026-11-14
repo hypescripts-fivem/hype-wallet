@@ -29,14 +29,15 @@ return {
     },
 
     -- Cüzdanda görünecek kartlar; sıralama yuva sırasını belirler.
+    -- `label` bir dil anahtarıdır (locales/*.json, `card.*`); düz metin de yazılabilir.
     -- Her karta ayrıca `background = 'https://...'` verilebilir.
     cards = {
-        { item = 'card_id',           label = 'Kimlik Kartı',         accent = '#3b82f6' },
-        { item = 'card_driver_car',   label = 'Araç Sürücü Ruhsatı',  accent = '#10b981' },
-        { item = 'card_driver_motor', label = 'Motor Sürücü Ruhsatı', accent = '#f59e0b' },
-        { item = 'card_driver_boat',  label = 'Tekne Sürücü Ruhsatı', accent = '#06b6d4' },
-        { item = 'card_driver_plane', label = 'Uçak Sürücü Ruhsatı',  accent = '#8b5cf6' },
-        { item = 'card_weapon',       label = 'Silah Ruhsatı',        accent = '#ef4444' },
-        { item = 'card_taxi',         label = 'Taksi Lisans Kartı',   accent = '#eab308' },
+        { item = 'card_id',           label = 'card.id',           accent = '#3b82f6' },
+        { item = 'card_driver_car',   label = 'card.driver_car',   accent = '#10b981' },
+        { item = 'card_driver_motor', label = 'card.driver_motor', accent = '#f59e0b' },
+        { item = 'card_driver_boat',  label = 'card.driver_boat',  accent = '#06b6d4' },
+        { item = 'card_driver_plane', label = 'card.driver_plane', accent = '#8b5cf6' },
+        { item = 'card_weapon',       label = 'card.weapon',       accent = '#ef4444' },
+        { item = 'card_taxi',         label = 'card.taxi',         accent = '#eab308' },
     },
 }

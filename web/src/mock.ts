@@ -4,23 +4,24 @@ import type { WalletActionResult, WalletCard, WalletPayload } from "@/types";
 
 const background = "https://i.ibb.co/vxvGzg1/card.png";
 
+// Same shape and formats as Qbox character data: YYYY-MM-DD birth dates, "M"/"F" sex
 const holder = {
-  firstname: "Deniz",
-  lastname: "Yılmaz",
-  birthdate: "14-03-1998",
+  firstname: "Jordan",
+  lastname: "Miller",
+  birthdate: "1996-07-21",
   sex: "M",
-  nationality: "Türkiye",
+  nationality: "American",
   citizenid: "HYP48291",
 };
 
 type StoredCard = Omit<WalletCard, "id" | "slot">;
 
 const definitions: Record<string, StoredCard> = {
-  card_id: { item: "card_id", label: "Kimlik Kartı", accent: "#3b82f6", background, holder },
-  card_driver_car: { item: "card_driver_car", label: "Araç Sürücü Ruhsatı", accent: "#10b981", background, holder },
-  card_weapon: { item: "card_weapon", label: "Silah Ruhsatı", accent: "#ef4444", background, holder },
-  card_taxi: { item: "card_taxi", label: "Taksi Lisans Kartı", accent: "#eab308", background, holder },
-  card_driver_boat: { item: "card_driver_boat", label: "Tekne Sürücü Ruhsatı", accent: "#06b6d4", background, holder },
+  card_id: { item: "card_id", label: "ID Card", accent: "#3b82f6", background, holder },
+  card_driver_car: { item: "card_driver_car", label: "Driver License", accent: "#10b981", background, holder },
+  card_weapon: { item: "card_weapon", label: "Weapon License", accent: "#ef4444", background, holder },
+  card_taxi: { item: "card_taxi", label: "Taxi License", accent: "#eab308", background, holder },
+  card_driver_boat: { item: "card_driver_boat", label: "Boat License", accent: "#06b6d4", background, holder },
 };
 
 const SLOTS = 8;
